@@ -78,14 +78,18 @@ scripts/generate-sitemap.js # reads public/data/games.json → public/sitemap.xm
 
 ## Deploy
 
-**Cloudflare Pages**
-- Build command: `npm run build`
-- Output directory: `dist`
-- Env var: `VITE_SITE_URL=https://your-domain.com`
+**Cloudflare (Workers with static assets)**
+- The repo includes `wrangler.json` (serves `dist/` with single-page-app
+  fallback for client-side routes) and wrangler as a devDependency.
+- Build settings in the Cloudflare dashboard:
+  - Build command: `npm run sitemap && npm run build` (set `VITE_SITE_URL` to
+    your final URL, e.g. `https://getgamerz.<your-subdomain>.workers.dev`)
+  - Deploy command: `npx wrangler deploy`
+- Or from your machine: `npm run deploy`
 
 **GitHub Pages**
 ```bash
-VITE_BASE=/getgamerz/ VITE_SITE_URL=https://username.github.io/getgamerz npm run build
+VITE_BASE=/getgamerz/ VITE_SITE_URL=https://username.github.io/getgamerz npm run sitemap && npm run build
 npx gh-pages -d dist
 ```
 Set `segmentCount = 1` in `public/404.html` for project pages
