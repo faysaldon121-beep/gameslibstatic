@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import Seo from '../components/Seo.jsx'
+import Seo, { SITE } from '../components/Seo.jsx'
 import { useGames } from '../context/GamesContext.jsx'
 import { formatDate } from '../lib/games.js'
 import { renderMarkdown } from '../lib/markdown.js'
