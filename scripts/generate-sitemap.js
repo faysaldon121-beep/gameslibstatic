@@ -17,12 +17,17 @@ const urls = [
   { loc: '/', priority: '1.0', freq: 'daily' },
   { loc: '/games', priority: '0.9', freq: 'daily' },
   { loc: '/about', priority: '0.4', freq: 'monthly' },
-  ...games.map((g) => ({
-    loc: `/games/${g.slug}`,
-    priority: '0.8',
-    freq: 'weekly',
-    lastmod: g.releaseDate ? g.releaseDate.split('T')[0] : today,
-  })),
+  ...games
+    .map((g) => g.slug || g.title_as_slug)
+    .filter(Boolean)
+    // de-dupe slugs so the sitemap never lists the same URL twice
+    .filter((slug, i, arr) => arr.indexOf(slug) === i)
+    .map((slug) => ({
+      loc: `/games/${slug}`,
+      priority: '0.8',
+      freq: 'weekly',
+      lastmod: today,
+    })),
 ]
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>

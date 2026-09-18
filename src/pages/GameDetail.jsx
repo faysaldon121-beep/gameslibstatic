@@ -143,6 +143,19 @@ export default function GameDetail() {
             dangerouslySetInnerHTML={{ __html: renderMarkdown(game.description) }}
           />
 
+          {game.trailer && (
+            <div className="trailer">
+              <iframe
+                src={game.trailer}
+                title={`${game.title} trailer`}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
+          )}
+
           {game.images.length > 0 && (
             <div className="gallery">
               {game.images.map((src, i) => (
