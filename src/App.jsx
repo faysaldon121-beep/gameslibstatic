@@ -1,9 +1,6 @@
-import { useState } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import { GamesProvider, useGames } from './context/GamesContext.jsx'
-import TitleBar from './components/TitleBar.jsx'
-import Sidebar from './components/Sidebar.jsx'
-import TabBar from './components/TabBar.jsx'
+import Nav from './components/Nav.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
 import Games from './pages/Games.jsx'
@@ -56,25 +53,13 @@ function Catalog() {
 }
 
 export default function App() {
-  const [zoomed, setZoomed] = useState(false)
-
   return (
     <GamesProvider>
-      <div className="desktop">
-        <div className={`mac-window ${zoomed ? 'window--zoomed' : ''}`}>
-          <TitleBar onToggleZoom={() => setZoomed((v) => !v)} />
-          <div className="window-body">
-            <Sidebar />
-            <main className="content">
-              <div className="content-inner">
-                <Catalog />
-              </div>
-            </main>
-          </div>
-          <Footer />
-        </div>
-        <TabBar />
-      </div>
+      <Nav />
+      <main>
+        <Catalog />
+      </main>
+      <Footer />
     </GamesProvider>
   )
 }

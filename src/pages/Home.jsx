@@ -37,65 +37,69 @@ export default function Home() {
         ogDescription="Your next game is one click away. Free PC downloads, working links, zero nonsense. Get in, grab it, go play."
       />
 
-      <section className="page-hero">
-        <h1>Your next game is one click away.</h1>
-        <p className="page-hero-sub">
-          Free PC downloads with links that work. No surveys, no fake buttons,
-          no "click here to unlock." Just pick a game and play.
-        </p>
-        <form className="hero-search" onSubmit={onSearch} role="search">
-          <input
-            type="search"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="What are you playing tonight?"
-            aria-label="Search games"
-          />
-          <button className="btn" type="submit">Search</button>
-        </form>
+      {/* Hero */}
+      <section className="hero">
+        <div className="container">
+          <h1>Your next game is<br className="hero-break" /> one click away.</h1>
+          <p className="hero-sub">
+            Free PC downloads with links that work. No surveys, no fake buttons,
+            no "click here to unlock." Just pick a game and play.
+          </p>
+          <form className="hero-search" onSubmit={onSearch} role="search">
+            <input
+              type="search"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="What are you playing tonight?"
+              aria-label="Search games"
+            />
+            <button className="btn" type="submit">Search</button>
+          </form>
+          <p className="hero-cta-row">
+            <Link className="chev" to="/games">Browse the full catalog</Link>
+          </p>
 
-        <div className="stats">
-          <div><strong>{games.length}</strong><span>games ready to download</span></div>
-          <div><strong>{totalDownloads.toLocaleString()}</strong><span>gamers already grabbed theirs</span></div>
-          <div><strong>{genres.length}</strong><span>genres, zero filler</span></div>
+          <div className="stats">
+            <div><strong>{games.length}</strong><span>games ready to download</span></div>
+            <div><strong>{totalDownloads.toLocaleString()}</strong><span>gamers already grabbed theirs</span></div>
+            <div><strong>{genres.length}</strong><span>genres, zero filler</span></div>
+          </div>
         </div>
       </section>
 
+      {/* Featured — full-bleed dark product panel */}
       {spotlight && (
-        <section className="home-section">
-          <div className="section-label">
-            <h2>Start Here</h2>
-          </div>
-          <Link
-            to={`/games/${spotlight.slug}`}
-            className="feature-banner"
-          >
-            <img src={spotlight.coverImage} alt={spotlight.title} />
-            <div className="feature-banner-overlay" aria-hidden="true" />
-            <div className="feature-banner-body">
-              <p className="eyebrow">Game of the week</p>
-              <h2>{spotlight.title}</h2>
-              <p className="feature-banner-desc">{spotlight.shortDescription}</p>
-              <div className="feature-banner-actions">
-                <span className="pill pill-accent">Get It</span>
-                <span className="feature-banner-note">
-                  Free · {spotlight.fileSize}
-                </span>
-              </div>
+        <section className="feature-hero">
+          <img className="feature-hero-img" src={spotlight.coverImage} alt="" />
+          <div className="feature-hero-overlay" aria-hidden="true" />
+          <div className="feature-hero-body">
+            <p className="eyebrow">Start Here</p>
+            <h2>{spotlight.title}</h2>
+            <p className="feature-hero-desc">{spotlight.shortDescription}</p>
+            <div className="feature-hero-actions">
+              <Link className="btn" to={`/games/${spotlight.slug}`}>Learn more</Link>
+              <Link className="chev chev-light" to={`/games/${spotlight.slug}`}>Get It</Link>
             </div>
-          </Link>
+            <p className="feature-hero-note">Free · {spotlight.fileSize}</p>
+          </div>
         </section>
       )}
 
-      <section className="home-section">
-        <div className="section-label">
-          <h2>Fresh Drops</h2>
-          <Link className="see-all" to="/games">See all ›</Link>
-        </div>
-        <div className="tile-grid">
-          {latestGames.slice(0, 8).map((g) => (
-            <GameCard key={g.slug} game={g} />
-          ))}
+      {/* Fresh Drops */}
+      <section className="section">
+        <div className="container">
+          <div className="section-head">
+            <h2>Fresh Drops.</h2>
+            <p>Freshly added to the catalog.</p>
+          </div>
+          <div className="tile-grid">
+            {latestGames.slice(0, 8).map((g) => (
+              <GameCard key={g.slug} game={g} />
+            ))}
+          </div>
+          <p className="section-more">
+            <Link className="chev" to="/games">See all games</Link>
+          </p>
         </div>
       </section>
     </>

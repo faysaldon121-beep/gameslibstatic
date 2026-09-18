@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom'
 
-// App Store–style app tile (icon, name, subtitle, pill button).
+// apple.com product-tile style card.
 export default function GameCard({ game }) {
   return (
-    <Link to={`/games/${game.slug}`} className="app-tile">
-      <img src={game.coverImage} alt={game.title} loading="lazy" />
-      <h3>{game.title}</h3>
-      <p>{game.genre} · {game.fileSize}</p>
-      <span className="pill">View</span>
+    <Link to={`/games/${game.slug}`} className="app-card">
+      <div className="app-card-media">
+        <img src={game.coverImage} alt={game.title} loading="lazy" />
+      </div>
+      <div className="app-card-body">
+        <h3>{game.title}</h3>
+        <p>{game.genre} · {game.fileSize}</p>
+        <span className="pill">View</span>
+      </div>
     </Link>
   )
 }

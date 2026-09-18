@@ -26,8 +26,6 @@ export default function GameDetail() {
     )
   }
 
-  // Fake download button at the top: it doesn't link to the file —
-  // it just scrolls to the real download links at the bottom of the page.
   const scrollTo = (id) => () => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
@@ -62,7 +60,7 @@ export default function GameDetail() {
     ['DirectX', 'directx'],
   ]
 
-  const metaRows = [
+  const generalRows = [
     ['Genre', game.genre],
     ['Platform', game.platforms.join(', ')],
     ['Developer', game.developer],
@@ -87,126 +85,151 @@ export default function GameDetail() {
         jsonLd={jsonLd}
       />
 
-      <nav className="breadcrumb">
-        <Link to="/">Home</Link>
-        <span>/</span>
-        <Link to="/games">Games</Link>
-        <span>/</span>
-        <span className="muted">{game.title}</span>
-      </nav>
+      {/* Product subnav — apple.com style ("Overview · Tech Specs" + Buy) */}
+      <div className="product-subnav">
+        <div className="subnav-inner">
+          <span className="subnav-title">{game.title}</span>
+          <nav className="subnav-links" aria-label="Sections">
+            <button type="button" onClick={scrollTo('overview')}>Overview</button>
+            <button type="button" onClick={scrollTo('specs')}>Tech Specs</button>
+            <button type="button" onClick={scrollTo('download')}>Download</button>
+          </nav>
+          {game.downloadLinks.length > 0 && (
+            <button type="button" className="btn btn-sm" onClick={scrollTo('download')}>
+              Grab It
+            </button>
+          )}
+        </div>
+      </div>
 
-      <div className="detail-head">
-        <img className="detail-icon" src={game.coverImage} alt={game.title} />
-        <div className="detail-head-info">
+      {/* Product hero */}
+      <section className="detail-hero">
+        <div className="container">
+          <nav className="breadcrumb" aria-label="Breadcrumb">
+            <Link to="/">Home</Link>
+            <span>/</span>
+            <Link to="/games">Games</Link>
+            <span>/</span>
+            <span>{game.title}</span>
+          </nav>
+
           <h1>{game.title}</h1>
           <p className="detail-sub">
             {game.developer} · {game.genre} · {game.platforms.join(', ')}
           </p>
 
           {game.downloadLinks.length > 0 && (
-            <div className="download-teaser">
-              {/* Fake button — no link, just scrolls to the real one below */}
+            <div className="detail-cta">
+              {/* Fake button — no link, scrolls to the real one below */}
               <button type="button" className="btn btn-lg" onClick={scrollTo('download')}>
                 Grab It — {game.fileSize}
               </button>
-              <button type="button" className="nudge" onClick={scrollTo('requirements')}>
+              <button type="button" className="nudge" onClick={scrollTo('specs')}>
                 Running on a potato? Check the requirements first.
               </button>
             </div>
           )}
-        </div>
-      </div>
 
-      <section className="block">
-        <div className="settings-group">
-          {metaRows.map(([label, value]) => (
-            <div className="settings-row" key={label}>
-              <span className="settings-label">{label}</span>
-              <span className="settings-value">{value}</span>
+          <img className="detail-cover" src={game.coverImage} alt={game.title} />
+        </div>
+      </section>
+
+      {/* Overview */}
+      <section className="block" id="overview">
+        <div className="container">
+          <h2>Overview</h2>
+          <div
+            className="prose"
+            dangerouslySetInnerHTML={{ __html: renderMarkdown(game.description) }}
+          />
+
+          {game.images.length > 0 && (
+            <div className="gallery">
+              {game.images.map((src, i) => (
+                <img key={i} src={src} alt={`${game.title} screenshot ${i + 1}`} loading="lazy" />
+              ))}
             </div>
-          ))}
+          )}
         </div>
       </section>
 
-      {game.images.length > 0 && (
-        <section className="block">
-          <h2>Screenshots</h2>
-          <div className="gallery">
-            {game.images.map((src, i) => (
-              <img key={i} src={src} alt={`${game.title} screenshot ${i + 1}`} loading="lazy" />
-            ))}
-          </div>
-        </section>
-      )}
-
-      <section className="block">
-        <h2>About this game</h2>
-        <div
-          className="prose"
-          dangerouslySetInnerHTML={{ __html: renderMarkdown(game.description) }}
-        />
-      </section>
-
-      <section className="block" id="requirements">
-        <h2>System requirements</h2>
-        <div className="req-grid">
-          {['minimum', 'recommended'].map((tier) => (
-            <div className="settings-group" key={tier}>
-              <div className="settings-group-title">
-                {tier === 'minimum' ? 'Minimum' : 'Recommended'}
-              </div>
-              {reqRows.map(([label, key]) => (
-                <div className="settings-row" key={key}>
-                  <span className="settings-label">{label}</span>
-                  <span className="settings-value">
-                    {game.requirements?.[tier]?.[key] || '—'}
-                  </span>
+      {/* Tech Specs */}
+      <section className="section-alt block-alt" id="specs">
+        <div className="container">
+          <h2>Tech Specs</h2>
+          <div className="spec-groups">
+            <div className="spec-group">
+              <div className="spec-group-title">General</div>
+              {generalRows.map(([label, value]) => (
+                <div className="spec-row" key={label}>
+                  <span className="spec-label">{label}</span>
+                  <span className="spec-value">{value}</span>
                 </div>
               ))}
             </div>
-          ))}
+            <div className="spec-group">
+              <div className="spec-group-title">Minimum</div>
+              {reqRows.map(([label, key]) => (
+                <div className="spec-row" key={key}>
+                  <span className="spec-label">{label}</span>
+                  <span className="spec-value">{game.requirements?.minimum?.[key] || '—'}</span>
+                </div>
+              ))}
+            </div>
+            <div className="spec-group">
+              <div className="spec-group-title">Recommended</div>
+              {reqRows.map(([label, key]) => (
+                <div className="spec-row" key={key}>
+                  <span className="spec-label">{label}</span>
+                  <span className="spec-value">{game.requirements?.recommended?.[key] || '—'}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {game.tags.length > 0 && (
-        <section className="block">
-          <h2>Tags</h2>
-          <div className="token-row">
-            {game.tags.map((t) => (
-              <Link key={t} className="token" to={`/games?q=${encodeURIComponent(t)}`}>
-                #{t}
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
+      <div className="container">
+        {game.tags.length > 0 && (
+          <section className="block">
+            <h2>Tags</h2>
+            <div className="token-row token-row-left">
+              {game.tags.map((t) => (
+                <Link key={t} className="token" to={`/games?q=${encodeURIComponent(t)}`}>
+                  #{t}
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
-      {game.installationGuide.length > 0 && (
-        <section className="block">
-          <h2>Installation guide</h2>
-          <ol className="steps">
-            {game.installationGuide.map((step, i) => (
-              <li key={i}>{step}</li>
-            ))}
-          </ol>
-        </section>
-      )}
+        {game.installationGuide.length > 0 && (
+          <section className="block">
+            <h2>Installation guide</h2>
+            <ol className="steps">
+              {game.installationGuide.map((step, i) => (
+                <li key={i}>{step}</li>
+              ))}
+            </ol>
+          </section>
+        )}
 
-      {game.changelog && (
-        <section className="block">
-          <h2>Changelog</h2>
-          <div className="prose" dangerouslySetInnerHTML={{ __html: renderMarkdown(game.changelog) }} />
-        </section>
-      )}
+        {game.changelog && (
+          <section className="block">
+            <h2>Changelog</h2>
+            <div className="prose" dangerouslySetInnerHTML={{ __html: renderMarkdown(game.changelog) }} />
+          </section>
+        )}
+      </div>
 
+      {/* Real download panel */}
       {game.downloadLinks.length > 0 && (
-        <section className="block" id="download">
-          <div className="download-panel">
+        <section className="download-section" id="download">
+          <div className="container">
             <h2>Get {game.title}.</h2>
             <p className="muted">
               {game.fileSize} · {game.platforms.join(', ')} · Version {game.version}
             </p>
-            {/* Real buttons — the actual downloadLinks[].url from the data */}
             <div className="downloads">
               {game.downloadLinks.map((d, i) => (
                 <a
@@ -221,7 +244,7 @@ export default function GameDetail() {
                 </a>
               ))}
             </div>
-            <p className="muted small" style={{ marginTop: 16 }}>
+            <p className="muted small" style={{ marginTop: 18 }}>
               Hosted on{' '}
               {game.downloadLinks.map((d) => d.host).filter(Boolean).join(', ') ||
                 'an external host'}{' '}
