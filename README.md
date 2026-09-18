@@ -54,11 +54,14 @@ iOS-style bottom tab bar on mobile.
 
 ## Configuration
 
-Copy `.env.example` to `.env` and set your real domain:
+No domain configuration needed for the site itself — SEO tags (canonical
+URLs, Open Graph, JSON-LD) automatically use whatever domain is in the
+visitor's URL bar, so it works unchanged on `workers.dev`, a custom domain,
+or GitHub Pages.
 
-```
-VITE_SITE_URL=https://your-domain.com
-```
+`VITE_SITE_URL` is optional and only used at build time by
+`npm run sitemap` (for `sitemap.xml` / `robots.txt`). Set it in `.env` or as
+a build environment variable if you want those files pinned to a domain.
 
 ## Structure
 

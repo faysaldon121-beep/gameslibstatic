@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import Seo from '../components/Seo.jsx'
+import Seo, { SITE } from '../components/Seo.jsx'
 import GameCard from '../components/GameCard.jsx'
 import { useGames } from '../context/GamesContext.jsx'
-
-const SITE = import.meta.env.VITE_SITE_URL || 'https://getgamerz.pages.dev'
 
 export default function Home() {
   const [q, setQ] = useState('')

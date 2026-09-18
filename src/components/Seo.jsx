@@ -1,6 +1,13 @@
 import { Helmet } from 'react-helmet-async'
 
-const SITE = import.meta.env.VITE_SITE_URL || 'https://getgamerz.pages.dev'
+// Site URL resolution: explicit VITE_SITE_URL (for builds where the domain is
+// known ahead of time) — otherwise the domain is read automatically from the
+// browser's URL bar, so canonical/OG/JSON-LD URLs are always correct no matter
+// where the site is deployed (workers.dev, custom domain, GitHub Pages, …).
+export const SITE =
+  import.meta.env.VITE_SITE_URL ||
+  (typeof window !== 'undefined' ? window.location.origin : '')
+
 const SITE_NAME = 'GetGamerz'
 const DEFAULT_DESCRIPTION =
   'Free PC game downloads that actually work. Full games, instant links, no surveys, no fake buttons. Find your next game and start playing in minutes.'
