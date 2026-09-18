@@ -29,7 +29,7 @@ export default function Games() {
     <>
       <Seo
         title="All Games"
-        description="Browse every PC game on GetGamerz. Filter by genre, tag, or search by name."
+        description="Every game, one click away. Free PC downloads with links that work — filter by genre or tag, then grab it."
         path="/games"
       />
 
@@ -39,17 +39,33 @@ export default function Games() {
       </div>
 
       <div className="filter-bar">
-        <div className="seg" role="group" aria-label="Filter by genre">
-          {['All', ...genres].map((g) => (
-            <button
-              key={g}
-              type="button"
-              className={genre === g ? 'is-active' : ''}
-              onClick={() => setGenre(g)}
-            >
-              {g}
-            </button>
-          ))}
+        <input
+          type="search"
+          className="filter-search"
+          value={q}
+          onChange={(e) => {
+            const value = e.target.value
+            if (value) setParams({ q: value }, { replace: true })
+            else setParams({}, { replace: true })
+          }}
+          placeholder="What are you playing tonight?"
+          aria-label="Search games"
+        />
+
+        <div className="filter-group">
+          <span className="filter-label">Pick your poison</span>
+          <div className="seg" role="group" aria-label="Filter by genre">
+            {['All', ...genres].map((g) => (
+              <button
+                key={g}
+                type="button"
+                className={genre === g ? 'is-active' : ''}
+                onClick={() => setGenre(g)}
+              >
+                {g}
+              </button>
+            ))}
+          </div>
         </div>
 
         {allTags.length > 0 && (
@@ -70,8 +86,8 @@ export default function Games() {
 
       {filtered.length === 0 ? (
         <div className="empty-state">
-          <h3>No games found</h3>
-          <p className="muted">Try clearing the filters or searching for something else.</p>
+          <h3>Nothing here.</h3>
+          <p className="muted">Try a different search, or just browse the catalog — you'll find something.</p>
         </div>
       ) : (
         <div className="list">

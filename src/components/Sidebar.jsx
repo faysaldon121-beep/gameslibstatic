@@ -47,6 +47,7 @@ export default function Sidebar() {
       <div className="sidebar-footer">
         <p><strong>{games.length}</strong> games in catalog</p>
         <p>{totalDownloads.toLocaleString()} downloads</p>
+        <p className="sidebar-copy">© {new Date().getFullYear()} GetGamerz</p>
       </div>
     </nav>
   )

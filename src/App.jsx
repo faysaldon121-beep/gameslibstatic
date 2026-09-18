@@ -13,9 +13,9 @@ import About from './pages/About.jsx'
 function NotFound() {
   return (
     <div className="empty-state">
-      <h1>404</h1>
-      <p>That page doesn't exist.</p>
-      <Link className="btn" to="/">Back to home</Link>
+      <h1>This one got away.</h1>
+      <p className="muted">The link's broken or the game's gone. No big deal — the catalog's right this way.</p>
+      <Link className="btn" to="/games">Browse the catalog</Link>
     </div>
   )
 }
@@ -27,7 +27,7 @@ function Catalog() {
     return (
       <div className="page-state">
         <div className="spinner" aria-hidden="true" />
-        <p className="muted">Loading catalog…</p>
+        <p className="muted">Loading your next obsession…</p>
       </div>
     )
   }

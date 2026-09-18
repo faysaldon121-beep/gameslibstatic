@@ -271,6 +271,12 @@ h1, h2, h3 { line-height: 1.15; margin: 0 0 0.5em; letter-spacing: -0.015em; }
   border-top: 1px solid var(--separator);
 }
 
+.status-tagline {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* ---------- Mobile tab bar (iOS counterpart) ---------- */
 
 .tab-bar {
@@ -787,4 +793,5 @@ h1, h2, h3 { line-height: 1.15; margin: 0 0 0.5em; letter-spacing: -0.015em; }
   .list-row { padding: 11px 12px; gap: 12px; }
   .list-row-meta .small { display: none; }
   .download-panel { padding: 34px 16px; }
+  .toast { bottom: calc(72px + env(safe-area-inset-bottom)); }
 }

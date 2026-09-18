@@ -7,9 +7,13 @@ export default function Footer() {
   return (
     <footer className="status-bar">
       <span>
-        {loading ? 'Loading…' : `${games.length} games · ${totalDownloads.toLocaleString()} downloads`}
+        {loading
+          ? 'Loading…'
+          : `${games.length} games · ${totalDownloads.toLocaleString()} downloads`}
       </span>
-      <span>© {new Date().getFullYear()} GetGamerz</span>
+      <span className="status-tagline">
+        GetGamerz — free PC games, instant downloads, zero nonsense.
+      </span>
     </footer>
   )
 }

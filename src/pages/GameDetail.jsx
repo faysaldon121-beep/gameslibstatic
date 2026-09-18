@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import Seo from '../components/Seo.jsx'
 import { useGames } from '../context/GamesContext.jsx'
@@ -9,22 +10,32 @@ export default function GameDetail() {
   const { getGameBySlug } = useGames()
   const game = getGameBySlug(slug)
 
+  // macOS-style toast for the "download started" microcopy
+  const [toast, setToast] = useState(null)
+  const toastTimer = useRef(null)
+
+  useEffect(() => () => window.clearTimeout(toastTimer.current), [])
+
   if (!game) {
     return (
       <div className="empty-state">
-        <h1>Game not found</h1>
-        <p className="muted">We couldn't find a game with that slug.</p>
-        <Link className="btn" to="/games">Browse all games</Link>
+        <h1>This one got away.</h1>
+        <p className="muted">The link's broken or the game's gone. No big deal — the catalog's right this way.</p>
+        <Link className="btn" to="/games">Browse the catalog</Link>
       </div>
     )
   }
 
   // Fake download button at the top: it doesn't link to the file —
   // it just scrolls to the real download links at the bottom of the page.
-  const scrollToDownload = () => {
-    document
-      .getElementById('download')
-      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const scrollTo = (id) => () => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const onDownloadClick = (d) => {
+    window.clearTimeout(toastTimer.current)
+    setToast(`Download started. Go make a sandwich — this one's ${d.size || game.fileSize}.`)
+    toastTimer.current = window.setTimeout(() => setToast(null), 6000)
   }
 
   const jsonLd = {
@@ -94,10 +105,13 @@ export default function GameDetail() {
 
           {game.downloadLinks.length > 0 && (
             <div className="download-teaser">
-              <button type="button" className="btn btn-lg" onClick={scrollToDownload}>
-                Download
+              {/* Fake button — no link, just scrolls to the real one below */}
+              <button type="button" className="btn btn-lg" onClick={scrollTo('download')}>
+                Grab It — {game.fileSize}
               </button>
-              <p className="teaser-note">Free · {game.fileSize} · v{game.version}</p>
+              <button type="button" className="nudge" onClick={scrollTo('requirements')}>
+                Running on a potato? Check the requirements first.
+              </button>
             </div>
           )}
         </div>
@@ -133,7 +147,7 @@ export default function GameDetail() {
         />
       </section>
 
-      <section className="block">
+      <section className="block" id="requirements">
         <h2>System requirements</h2>
         <div className="req-grid">
           {['minimum', 'recommended'].map((tier) => (
@@ -192,6 +206,7 @@ export default function GameDetail() {
             <p className="muted">
               {game.fileSize} · {game.platforms.join(', ')} · Version {game.version}
             </p>
+            {/* Real buttons — the actual downloadLinks[].url from the data */}
             <div className="downloads">
               {game.downloadLinks.map((d, i) => (
                 <a
@@ -200,8 +215,9 @@ export default function GameDetail() {
                   href={d.url}
                   rel="nofollow noopener"
                   target="_blank"
+                  onClick={() => onDownloadClick(d)}
                 >
-                  {d.label} · {d.size}
+                  {game.downloadLinks.length > 1 ? `${d.label} · ${d.size}` : 'Download Now · Free'}
                 </a>
               ))}
             </div>
@@ -211,8 +227,15 @@ export default function GameDetail() {
                 'an external host'}{' '}
               — opens in a new tab.
             </p>
+            <p className="muted small">Link's dead? We're on it — try another host or check back in a bit.</p>
           </div>
         </section>
+      )}
+
+      {toast && (
+        <div className="toast" role="status">
+          {toast}
+        </div>
       )}
     </>
   )
