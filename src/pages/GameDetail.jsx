@@ -36,20 +36,31 @@ export default function GameDetail() {
     toastTimer.current = window.setTimeout(() => setToast(null), 6000)
   }
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'VideoGame',
-    name: game.title,
-    description: game.shortDescription,
-    image: game.coverImage,
-    genre: game.genre,
-    gamePlatform: game.platforms,
-    applicationCategory: 'Game',
-    operatingSystem: game.requirements?.minimum?.os || 'Windows',
-    ...(game.releaseDate ? { datePublished: game.releaseDate } : {}),
-    publisher: { '@type': 'Organization', name: game.publisher || 'Unknown' },
-    author: { '@type': 'Organization', name: game.developer || 'Unknown' },
-  }
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'VideoGame',
+      name: game.title,
+      description: game.shortDescription,
+      image: game.coverImage,
+      genre: game.genre,
+      gamePlatform: game.platforms,
+      applicationCategory: 'Game',
+      operatingSystem: game.requirements?.minimum?.os || 'Windows',
+      ...(game.releaseDate ? { datePublished: game.releaseDate } : {}),
+      publisher: { '@type': 'Organization', name: game.publisher || 'Unknown' },
+      author: { '@type': 'Organization', name: game.developer || 'Unknown' },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE || '/' },
+        { '@type': 'ListItem', position: 2, name: 'Games', item: `${SITE}/games` },
+        { '@type': 'ListItem', position: 3, name: game.title },
+      ],
+    },
+  ]
 
   const reqRows = [
     ['OS', 'os'],
@@ -264,12 +275,8 @@ export default function GameDetail() {
               ))}
             </div>
             <p className="muted small" style={{ marginTop: 18 }}>
-              Hosted on{' '}
-              {game.downloadLinks.map((d) => d.host).filter(Boolean).join(', ') ||
-                'an external host'}{' '}
-              — opens in a new tab.
+              Link's dead? We're on it — try another host or check back in a bit.
             </p>
-            <p className="muted small">Link's dead? We're on it — try another host or check back in a bit.</p>
           </div>
         </section>
       )}
