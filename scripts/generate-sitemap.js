@@ -1,0 +1,53 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const root = path.resolve(__dirname, '..')
+
+const SITE = (process.env.VITE_SITE_URL || 'https://getgamerz.pages.dev').replace(/\/$/, '')
+
+const games = JSON.parse(
+  fs.readFileSync(path.join(root, 'public/data/games.json'), 'utf-8')
+)
+
+const today = new Date().toISOString().split('T')[0]
+
+const urls = [
+  { loc: '/', priority: '1.0', freq: 'daily' },
+  { loc: '/games', priority: '0.9', freq: 'daily' },
+  { loc: '/about', priority: '0.4', freq: 'monthly' },
+  ...games.map((g) => ({
+    loc: `/games/${g.slug}`,
+    priority: '0.8',
+    freq: 'weekly',
+    lastmod: g.releaseDate ? g.releaseDate.split('T')[0] : today,
+  })),
+]
+
+const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls
+  .map(
+    (u) => `  <url>
+    <loc>${SITE}${u.loc}</loc>
+    <lastmod>${u.lastmod || today}</lastmod>
+    <changefreq>${u.freq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`
+  )
+  .join('\n')}
+</urlset>
+`
+
+fs.writeFileSync(path.join(root, 'public/sitemap.xml'), xml)
+console.log(`sitemap.xml written with ${urls.length} URLs`)
+
+// Also keep robots.txt in sync with the site URL.
+const robots = `User-agent: *
+Allow: /
+
+Sitemap: ${SITE}/sitemap.xml
+`
+fs.writeFileSync(path.join(root, 'public/robots.txt'), robots)
+console.log('robots.txt written')

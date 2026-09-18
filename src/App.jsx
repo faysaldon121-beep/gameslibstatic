@@ -1,0 +1,80 @@
+import { useState } from 'react'
+import { Routes, Route, Link } from 'react-router-dom'
+import { GamesProvider, useGames } from './context/GamesContext.jsx'
+import TitleBar from './components/TitleBar.jsx'
+import Sidebar from './components/Sidebar.jsx'
+import TabBar from './components/TabBar.jsx'
+import Footer from './components/Footer.jsx'
+import Home from './pages/Home.jsx'
+import Games from './pages/Games.jsx'
+import GameDetail from './pages/GameDetail.jsx'
+import About from './pages/About.jsx'
+
+function NotFound() {
+  return (
+    <div className="empty-state">
+      <h1>404</h1>
+      <p>That page doesn't exist.</p>
+      <Link className="btn" to="/">Back to home</Link>
+    </div>
+  )
+}
+
+function Catalog() {
+  const { loading, error, reload } = useGames()
+
+  if (loading) {
+    return (
+      <div className="page-state">
+        <div className="spinner" aria-hidden="true" />
+        <p className="muted">Loading catalog…</p>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="page-state">
+        <h2>Couldn't load the catalog</h2>
+        <p className="muted">
+          Failed to read <code>data/games.json</code> — {error}
+        </p>
+        <button className="btn" onClick={reload}>Try again</button>
+      </div>
+    )
+  }
+
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/games" element={<Games />} />
+      <Route path="/games/:slug" element={<GameDetail />} />
+      <Route path="/about" element={<About />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  )
+}
+
+export default function App() {
+  const [zoomed, setZoomed] = useState(false)
+
+  return (
+    <GamesProvider>
+      <div className="desktop">
+        <div className={`mac-window ${zoomed ? 'window--zoomed' : ''}`}>
+          <TitleBar onToggleZoom={() => setZoomed((v) => !v)} />
+          <div className="window-body">
+            <Sidebar />
+            <main className="content">
+              <div className="content-inner">
+                <Catalog />
+              </div>
+            </main>
+          </div>
+          <Footer />
+        </div>
+        <TabBar />
+      </div>
+    </GamesProvider>
+  )
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" type="image/png" href="%BASE_URL%logo.png" />
+    <link rel="apple-touch-icon" href="%BASE_URL%logo.png" />
+    <link rel="manifest" href="%BASE_URL%site.webmanifest" />
+
+    <title>GetGamerz — Free PC Game Downloads, Reviews &amp; System Requirements</title>
+    <meta name="description" content="GetGamerz is your source for free PC game downloads, detailed reviews, system requirements and installation guides." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="GetGamerz" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://peskgames.com" crossorigin />
+
+    <!-- GitHub Pages SPA deep-link restore (pairs with public/404.html) -->
+    <script>
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?')
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash)
+        }
+      })(window.location)
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
