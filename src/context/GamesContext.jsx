@@ -3,12 +3,18 @@ import { deriveCatalog } from '../lib/games.js'
 
 const GamesContext = createContext(null)
 
-export function GamesProvider({ children }) {
-  const [raw, setRaw] = useState(null)
+// initialData: catalog provided at mount time — used by the server prerender
+// pass and by main.jsx (which fetches before hydrating), so prerendered HTML
+// and hydrated React output match exactly. When absent, the provider fetches
+// data/games.json itself (dev / fallback path).
+export function GamesProvider({ children, initialData = null }) {
+  const [raw, setRaw] = useState(initialData)
   const [error, setError] = useState(null)
   const [reloadKey, setReloadKey] = useState(0)
 
   useEffect(() => {
+    if (initialData) return // data already provided — no fetch needed
+
     let alive = true
     setRaw(null)
     setError(null)
@@ -28,7 +34,7 @@ export function GamesProvider({ children }) {
     return () => {
       alive = false
     }
-  }, [reloadKey])
+  }, [reloadKey, initialData])
 
   const value = useMemo(
     () => ({

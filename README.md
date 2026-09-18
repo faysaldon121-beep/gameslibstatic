@@ -38,6 +38,24 @@ show the listing capability. Delete them freely, and replace their
 
 Run `npm run sitemap` after editing the catalog to refresh `sitemap.xml`.
 
+## How the build works (static prerendering)
+
+`npm run build` runs two steps:
+
+1. `vite build` — the standard SPA bundle in `dist/`
+2. `scripts/prerender.mjs` — builds a server bundle (`src/entry-server.jsx`)
+   and renders **every route** (`/`, `/games`, `/about`, `/games/<slug>` for
+   the whole catalog) to real static HTML with per-page `<title>`, meta
+   description, canonical, Open Graph and JSON-LD injected into `<head>`.
+
+Search engines get full, crawlable HTML per page; visitors get instant
+content that React then **hydrates** (no loading spinner on first paint).
+SPA fallback still covers anything not prerendered.
+
+Set `PRERENDER_ORIGIN` (or `VITE_SITE_URL`) at build time to get absolute
+canonical/OG URLs, e.g. `https://getgamerz.your-subdomain.workers.dev`.
+`npm run build:spa` skips prerendering if you ever want the pure SPA.
+
 ## Download buttons on game pages
 
 - **Top of page — fake button**: a large "Download" button that has no link;

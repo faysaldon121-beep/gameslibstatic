@@ -46,7 +46,7 @@ export default function GameDetail() {
     gamePlatform: game.platforms,
     applicationCategory: 'Game',
     operatingSystem: game.requirements?.minimum?.os || 'Windows',
-    datePublished: game.releaseDate,
+    ...(game.releaseDate ? { datePublished: game.releaseDate } : {}),
     publisher: { '@type': 'Organization', name: game.publisher || 'Unknown' },
     author: { '@type': 'Organization', name: game.developer || 'Unknown' },
   }
@@ -63,16 +63,18 @@ export default function GameDetail() {
   const generalRows = [
     ['Genre', game.genre],
     ['Platform', game.platforms.join(', ')],
-    ['Developer', game.developer],
-    ['Publisher', game.publisher],
-    ['Released', formatDate(game.releaseDate)],
-    ['Size', game.fileSize],
-    ['Version', game.version],
-    ['Downloads', game.downloadCount.toLocaleString()],
+    ['Size', game.fileSize || '—'],
+    game.version ? ['Version', game.version] : null,
+    game.language ? ['Language', game.language] : null,
+    game.lastUpdate ? ['Last update', game.lastUpdate] : null,
+    game.releaseDate ? ['Released', formatDate(game.releaseDate)] : null,
+    game.developer && game.developer !== 'Unknown' ? ['Developer', game.developer] : null,
+    game.publisher && game.publisher !== 'Unknown' ? ['Publisher', game.publisher] : null,
+    game.downloadCount ? ['Downloads', game.downloadCount.toLocaleString('en-US')] : null,
     ...(game.averageRating > 0
       ? [['Rating', `★ ${game.averageRating} (${game.reviewCount})`]]
       : []),
-  ]
+  ].filter(Boolean)
 
   return (
     <>
@@ -115,7 +117,11 @@ export default function GameDetail() {
 
           <h1>{game.title}</h1>
           <p className="detail-sub">
-            {game.developer} · {game.genre} · {game.platforms.join(', ')}
+            {[
+              game.developer && game.developer !== 'Unknown' ? game.developer : '',
+              game.genre,
+              game.platforms.join(', '),
+            ].filter(Boolean).join(' · ')}
           </p>
 
           {game.downloadLinks.length > 0 && (

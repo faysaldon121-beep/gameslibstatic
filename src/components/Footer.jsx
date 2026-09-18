@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="container">
         <p className="footnote">
           GetGamerz — free PC games, instant downloads, zero nonsense.
-          {' '}{games.length} games ready to download · {totalDownloads.toLocaleString()} downloads and counting.
+          {' '}{games.length} games ready to download · {totalDownloads.toLocaleString('en-US')} downloads and counting.
         </p>
 
         <nav className="footer-links" aria-label="Footer navigation">

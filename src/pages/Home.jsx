@@ -61,7 +61,7 @@ export default function Home() {
 
           <div className="stats">
             <div><strong>{games.length}</strong><span>games ready to download</span></div>
-            <div><strong>{totalDownloads.toLocaleString()}</strong><span>gamers already grabbed theirs</span></div>
+            <div><strong>{totalDownloads.toLocaleString('en-US')}</strong><span>gamers already grabbed theirs</span></div>
             <div><strong>{genres.length}</strong><span>genres, zero filler</span></div>
           </div>
         </div>

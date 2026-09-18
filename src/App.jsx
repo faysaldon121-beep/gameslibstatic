@@ -52,9 +52,9 @@ function Catalog() {
   )
 }
 
-export default function App() {
+export default function App({ catalog = null }) {
   return (
-    <GamesProvider>
+    <GamesProvider initialData={catalog}>
       <Nav />
       <main>
         <Catalog />
