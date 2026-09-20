@@ -108,10 +108,16 @@ scripts/generate-sitemap.js # reads public/data/games.json → public/sitemap.xm
   - Deploy command: `npx wrangler deploy`
 - Or from your machine: `npm run deploy`
 
-**GitHub Pages**
+**GitHub Pages** — live at https://faysaldon121-beep.github.io/gameslibstatic/
+- Served from the `gh-pages` branch (build_type: legacy). Rebuild and push
+  that branch to deploy:
 ```bash
-VITE_BASE=/getgamerz/ VITE_SITE_URL=https://username.github.io/getgamerz npm run sitemap && npm run build
+VITE_SITE_URL=https://faysaldon121-beep.github.io/gameslibstatic npm run sitemap
+VITE_BASE=/gameslibstatic/ VITE_SITE_URL=https://faysaldon121-beep.github.io/gameslibstatic PRERENDER_ORIGIN=https://faysaldon121-beep.github.io/gameslibstatic npm run build
 npx gh-pages -d dist
 ```
-Set `segmentCount = 1` in `public/404.html` for project pages
-(`username.github.io/repo`), `0` for user pages.
+- Unlike Cloudflare (auto-builds on every push), GitHub Pages needs this
+  re-deploy when the catalog changes.
+- Optional: switch to auto-building GitHub Actions by pushing
+  `.github/workflows/deploy.yml` (needs a token with `workflow` scope) and
+  changing the Pages source to "GitHub Actions".

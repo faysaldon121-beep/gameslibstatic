@@ -9,6 +9,11 @@ import App from './App.jsx'
 
 export { deriveCatalog } from './lib/games.js'
 
+// The base the client bundle was built with (e.g. "/" or "/gameslibstatic/").
+// The prerender script uses it to build render locations that match the
+// StaticRouter's basename.
+export const BASE_URL = import.meta.env.BASE_URL
+
 export function render(url, catalog) {
   const helmetContext = {}
   const html = renderToString(

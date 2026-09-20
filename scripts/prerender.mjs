@@ -43,13 +43,18 @@ async function main() {
 
   // 2. Load the SSR bundle + catalog
   const serverUrl = pathToFileURL(path.join(root, '.ssr/entry-server.js')).href
-  const { render, deriveCatalog } = await import(serverUrl)
+  const { render, deriveCatalog, BASE_URL } = await import(serverUrl)
 
   const catalogPath = path.join(root, 'public/data/games.json')
   const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf-8'))
   const { games } = deriveCatalog(catalog)
 
-  // 3. Render every route
+  // 3. Render every route.
+  // `route` is the file path (no base); `location` is what StaticRouter
+  // matches against — it must include the base the bundle was built with
+  // (e.g. /gameslibstatic/games/foo), or no route matches and the page
+  // renders empty.
+  const base = (BASE_URL || '/').replace(/\/$/, '')
   const routes = ['/', '/games', '/about', ...games.map((g) => `/games/${g.slug}`)]
 
   const shell = fs.readFileSync(path.join(root, 'dist/index.html'), 'utf-8')
@@ -69,10 +74,23 @@ async function main() {
 
   let written = 0
   for (const route of routes) {
-    const { html, helmet } = render(route, catalog)
+    const location = `${base}${route}` || '/'
+    const { html, helmet } = render(location, catalog)
 
-    const head = ['title', 'meta', 'link', 'script', 'style']
-      .map((k) => (helmet[k] ? helmet[k].toString() : ''))
+    // Guard: a route mismatch renders an empty shell — fail the build loudly
+    // instead of publishing blank pages.
+    if (!html || html.length < 100) {
+      throw new Error(`Prerender produced an empty page for ${route} (location ${location})`)
+    }
+
+    const title = helmet.title?.toString() || ''
+    const head = [
+      // skip Helmet's empty <title></title> artifact
+      title && !/^<title[^>]*><\/title>$/.test(title) ? title : '',
+      ...['meta', 'link', 'script', 'style'].map((k) =>
+        helmet[k] ? helmet[k].toString() : ''
+      ),
+    ]
       .filter(Boolean)
       .join('\n')
 
