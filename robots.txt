@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://faysaldon121-beep.github.io/gameslibstatic/sitemap.xml
