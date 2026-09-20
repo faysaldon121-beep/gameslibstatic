@@ -60,6 +60,7 @@ export default function App({ catalog = null }) {
       <main>
         <Catalog />
       </main>
+      <AdBanner />
       <Footer />
     </GamesProvider>
   )
