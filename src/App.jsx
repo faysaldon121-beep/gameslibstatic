@@ -1,6 +1,7 @@
 import { Routes, Route, Link } from 'react-router-dom'
 import { GamesProvider, useGames } from './context/GamesContext.jsx'
 import Nav from './components/Nav.jsx'
+import AdBanner from './components/AdBanner.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
 import Games from './pages/Games.jsx'

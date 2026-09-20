@@ -18,6 +18,13 @@ export default function Footer() {
           <Link to="/games">Games</Link>
           <Link to="/about">About</Link>
           <a href={`${import.meta.env.BASE_URL}sitemap.xml`}>Sitemap</a>
+          <a
+            href="https://www.profitableratecpmnetwork.com/tpfr6zkq54?key=a6f9aaed93c926262e1e50ccd374305c"
+            target="_blank"
+            rel="sponsored noopener"
+          >
+            Sponsored
+          </a>
         </nav>
 
         <div className="footer-legal">
