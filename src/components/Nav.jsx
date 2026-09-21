@@ -20,7 +20,7 @@ export default function Nav() {
     <header className="global-nav">
       <div className="global-nav-inner">
         <Link to="/" className="nav-brand" onClick={close} aria-label="GetGamerz home">
-          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="" />
+          <img src={`${import.meta.env.BASE_URL}logo-96.png`} alt="" />
           <span className="nav-brand-name">GetGamerz</span>
         </Link>
 

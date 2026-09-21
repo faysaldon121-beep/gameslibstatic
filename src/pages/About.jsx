@@ -11,7 +11,7 @@ export default function About() {
       />
       <div className="container about-wrap">
         <div className="about-box">
-          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="GetGamerz logo" />
+          <img src={`${import.meta.env.BASE_URL}logo-180.png`} alt="GetGamerz logo" />
           <h1>GetGamerz</h1>
           <p className="muted">Version 1.0</p>
         </div>

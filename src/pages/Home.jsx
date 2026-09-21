@@ -77,7 +77,7 @@ export default function Home() {
             <h2>{spotlight.title}</h2>
             <p className="feature-hero-desc">{spotlight.shortDescription}</p>
             <div className="feature-hero-actions">
-              <Link className="btn" to={`/games/${spotlight.slug}`}>Learn more</Link>
+              <Link className="btn" to={`/games/${spotlight.slug}`} aria-label={`Learn more about ${spotlight.title}`}>Learn more</Link>
               <Link className="chev chev-light" to={`/games/${spotlight.slug}`}>Get It</Link>
             </div>
             <p className="feature-hero-note">Free · {spotlight.fileSize}</p>

@@ -56,3 +56,33 @@ Sitemap: ${SITE}/sitemap.xml
 `
 fs.writeFileSync(path.join(root, 'public/robots.txt'), robots)
 console.log('robots.txt written')
+
+// llms.txt — markdown guide for AI agents/crawlers (llmstxt.org format).
+const llms = `# GetGamerz
+
+> Free PC game downloads that actually work. Real system requirements, honest
+> screenshots, verified links. No surveys, no fake buttons.
+
+Each game page includes an overview, tech specs (minimum and recommended
+system requirements), screenshots, trailer when available, and a direct
+download link with the exact file size.
+
+## Pages
+
+- [Home](${SITE}/): featured game and fresh drops
+- [All Games](${SITE}/games): the full catalog, filterable by genre and search
+- [About](${SITE}/about): what the site does and how it works
+
+## Catalog
+
+${games
+  .map((g) => {
+    const title = g.game_title || g.title
+    const slug = g.title_as_slug || g.slug
+    const cat = g.game_category || g.genre || 'PC Games'
+    return `- [${title}](${SITE}/games/${slug}) — ${cat}`
+  })
+  .join('\n')}
+`
+fs.writeFileSync(path.join(root, 'public/llms.txt'), llms)
+console.log('llms.txt written')
