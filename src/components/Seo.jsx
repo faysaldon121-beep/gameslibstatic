@@ -10,7 +10,7 @@ export const SITE =
 
 const SITE_NAME = 'GetGamerz'
 const DEFAULT_DESCRIPTION =
-  'Free PC game downloads that actually work. Full games, instant links, no surveys, no fake buttons. Find your next game and start playing in minutes.'
+  'A huge library of full free PC games with all content and add-ons (DLCs), with direct download links. No surveys, no fake buttons — get playing in minutes.'
 
 export default function Seo({
   title,

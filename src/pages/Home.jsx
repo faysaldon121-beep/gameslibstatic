@@ -34,16 +34,17 @@ export default function Home() {
       <Seo
         path="/"
         jsonLd={jsonLd}
-        ogDescription="Your next game is one click away. Free PC downloads, working links, zero nonsense. Get in, grab it, go play."
+        ogDescription="A huge library of full free PC games with all content and add-ons (DLCs), with direct download links. Get in, grab it, go play."
       />
 
       {/* Hero */}
       <section className="hero">
         <div className="container">
-          <h1>Your next game is<br className="hero-break" /> one click away.</h1>
+          <h1>A huge library of<br className="hero-break" /> full free PC games.</h1>
           <p className="hero-sub">
-            Free PC downloads with links that work. No surveys, no fake buttons,
-            no "click here to unlock." Just pick a game and play.
+            Every title includes all content and add-ons (DLCs), delivered with
+            direct download links. No surveys, no fake buttons — pick a game
+            and play tonight.
           </p>
           <form className="hero-search" onSubmit={onSearch} role="search">
             <input
