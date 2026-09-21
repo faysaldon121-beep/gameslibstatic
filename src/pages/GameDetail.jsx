@@ -36,6 +36,15 @@ export default function GameDetail() {
     toastTimer.current = window.setTimeout(() => setToast(null), 6000)
   }
 
+  // Keyword-targeted SEO title: matches how people search ("download <game>
+  // free for pc"). Keeps the brand suffix when it fits Google's ~60-char
+  // display limit, and degrades gracefully for very long game titles.
+  const kwTitle = `Download ${game.title} Free for PC`
+  const fitsWithBrand = kwTitle.length + 12 <= 62
+  const seoTitle = kwTitle.length <= 62 ? kwTitle : game.title
+
+  const kwDesc = `Download ${game.title} for free on PC — full game${game.fileSize ? ` (${game.fileSize})` : ''}${game.version ? `, ${game.version}` : ''}. Minimum and recommended specs, screenshots and a direct download link. No surveys, no fake buttons.`
+
   const jsonLd = [
     {
       '@context': 'https://schema.org',
@@ -90,8 +99,9 @@ export default function GameDetail() {
   return (
     <>
       <Seo
-        title={game.title}
-        description={game.shortDescription}
+        title={seoTitle}
+        titleSuffix={fitsWithBrand || kwTitle.length > 62}
+        description={kwDesc}
         image={game.coverImage}
         path={`/games/${game.slug}`}
         type="article"
@@ -256,7 +266,7 @@ export default function GameDetail() {
       {game.downloadLinks.length > 0 && (
         <section className="download-section" id="download">
           <div className="container">
-            <h2>Get {game.title}.</h2>
+            <h2>Download {game.title} for free.</h2>
             <p className="muted">
               {game.fileSize} · {game.platforms.join(', ')} · Version {game.version}
             </p>

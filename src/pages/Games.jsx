@@ -35,8 +35,8 @@ export default function Games() {
   return (
     <>
       <Seo
-        title="All Games"
-        description="Every game, one click away. Free PC downloads with links that work — filter by genre or tag, then grab it."
+        title="Free PC Games — Full Catalog (All DLCs)"
+        description="Browse every free PC game in the GetGamerz library — full games with all DLCs and direct download links. Filter by genre or search by name."
         path="/games"
       />
 

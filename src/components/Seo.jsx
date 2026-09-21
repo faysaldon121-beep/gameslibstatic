@@ -14,6 +14,7 @@ const DEFAULT_DESCRIPTION =
 
 export default function Seo({
   title,
+  titleSuffix = true,
   description = DEFAULT_DESCRIPTION,
   ogDescription,
   image,
@@ -21,7 +22,11 @@ export default function Seo({
   type = 'website',
   jsonLd,
 }) {
-  const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — Download PC Games Free, Play Tonight`
+  const fullTitle = title
+    ? titleSuffix
+      ? `${title} | ${SITE_NAME}`
+      : title
+    : `${SITE_NAME} — Free PC Games Download, Full Games + DLCs`
   const url = `${SITE.replace(/\/$/, '')}${path}`
 
   return (
