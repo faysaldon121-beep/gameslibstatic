@@ -108,23 +108,6 @@ export default function GameDetail() {
         jsonLd={jsonLd}
       />
 
-      {/* Product subnav — apple.com style ("Overview · Tech Specs" + Buy) */}
-      <div className="product-subnav">
-        <div className="subnav-inner">
-          <span className="subnav-title">{game.title}</span>
-          <nav className="subnav-links" aria-label="Sections">
-            <button type="button" onClick={scrollTo('overview')}>Overview</button>
-            <button type="button" onClick={scrollTo('specs')}>Tech Specs</button>
-            <button type="button" onClick={scrollTo('download')}>Download</button>
-          </nav>
-          {game.downloadLinks.length > 0 && (
-            <button type="button" className="btn btn-sm" onClick={scrollTo('download')}>
-              Grab It
-            </button>
-          )}
-        </div>
-      </div>
-
       {/* Product hero */}
       <section className="detail-hero">
         <div className="container">

@@ -65,10 +65,9 @@ canonical/OG URLs, e.g. `https://getgamerz.your-subdomain.workers.dev`.
 
 ## UI
 
-macOS 13 Ventura look: window with traffic lights (green toggles zoom /
-double-click the title), translucent sidebar navigation, toolbar search field,
-segmented genre control, grouped settings-style info rows, status bar, and an
-iOS-style bottom tab bar on mobile.
+Simple, plain website UI: white background, system font, a basic top bar
+(brand + links), bordered cards, one accent color (brand violet). No UI
+framework — hand-written CSS in `src/index.css`.
 
 ## Configuration
 
