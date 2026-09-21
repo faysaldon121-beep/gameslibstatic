@@ -19,7 +19,14 @@ export default function Footer() {
           <Link to="/about">About</Link>
           <a href={`${import.meta.env.BASE_URL}sitemap.xml`}>Sitemap</a>
           <a
-            href="https://www.profitableratecpmnetwork.com/tpfr6zkq54?key=a6f9aaed93c926262e1e50ccd374305c"
+            href="https://recallscarce.com/tpfr6zkq54?key=a6f9aaed93c926262e1e50ccd374305c"
+            target="_blank"
+            rel="sponsored noopener"
+          >
+            Sponsored
+          </a>
+          <a
+            href="https://recallscarce.com/aaert16w3h?key=7da9c4b4c6cf4813853035a99ea119b0"
             target="_blank"
             rel="sponsored noopener"
           >
