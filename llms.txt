@@ -1,0 +1,52 @@
+# GetGamerz
+
+> Free PC game downloads that actually work. Real system requirements, honest
+> screenshots, verified links. No surveys, no fake buttons.
+
+Each game page includes an overview, tech specs (minimum and recommended
+system requirements), screenshots, trailer when available, and a direct
+download link with the exact file size.
+
+## Pages
+
+- [Home](https://faysaldon121-beep.github.io/gameslibstatic/): featured game and fresh drops
+- [All Games](https://faysaldon121-beep.github.io/gameslibstatic/games): the full catalog, filterable by genre and search
+- [About](https://faysaldon121-beep.github.io/gameslibstatic/about): what the site does and how it works
+
+## Catalog
+
+- [Assassin’s Creed Mirage: Master Assassin Edition](https://faysaldon121-beep.github.io/gameslibstatic/games/assassins-creed-mirage-master-assassin-edition) — PC Games
+- [Grand Theft Auto V / GTA 5](https://faysaldon121-beep.github.io/gameslibstatic/games/grand-theft-auto-v-gta-5) — PC Games
+- [Red Dead Redemption 2](https://faysaldon121-beep.github.io/gameslibstatic/games/red-dead-redemption-2) — PC Games
+- [READY OR NOT](https://faysaldon121-beep.github.io/gameslibstatic/games/ready-or-not) — PC Games
+- [Cyberpunk 2077: Ultimate Edition](https://faysaldon121-beep.github.io/gameslibstatic/games/cyberpunk-2077-ultimate-edition) — PC Games
+- [Forza Horizon 5: Premium Edition](https://faysaldon121-beep.github.io/gameslibstatic/games/forza-horizon-5) — Racing
+- [The Elder Scrolls IV: Oblivion Remastered – Deluxe Edition](https://faysaldon121-beep.github.io/gameslibstatic/games/the-elder-scrolls-iv-oblivion-remastered-deluxe-edition-all-dlcsbonuses) — RPG
+- [Ghost of Tsushima: DIRECTOR’S CUT](https://faysaldon121-beep.github.io/gameslibstatic/games/ghost-of-tsushima-directors-cut-dlc-bonus-content-multiplayer) — PC Games
+- [ELDEN RING: Shadow of the Erdtree Deluxe Edition](https://faysaldon121-beep.github.io/gameslibstatic/games/elden-ring-shadow-of-the-erdtree-deluxe-edition-9-dlcsbonuses) — RPG
+- [Mortal Kombat 11: Ultimate Edition](https://faysaldon121-beep.github.io/gameslibstatic/games/mortal-kombat-11) — PC Games
+- [S.T.A.L.K.E.R. 2: Heart of Chornobyl – Deluxe Edition](https://faysaldon121-beep.github.io/gameslibstatic/games/stalker-2-heart-of-chornobyl-deluxe-edition) — PC Games
+- [GTA 4 / Grand Theft Auto IV: The Complete Edition](https://faysaldon121-beep.github.io/gameslibstatic/games/grand-theft-auto-iv-complete-edition) — PC Games
+- [GTA SAN ANDREAS](https://faysaldon121-beep.github.io/gameslibstatic/games/gta-san-andreas) — PC Games
+- [EA SPORTS FIFA 23](https://faysaldon121-beep.github.io/gameslibstatic/games/ea-sports-fifa-23) — PC Games
+- [WWE 2K15](https://faysaldon121-beep.github.io/gameslibstatic/games/wwe-2k15-all-dlcs) — PC Games
+- [Wreckfest](https://faysaldon121-beep.github.io/gameslibstatic/games/wreckfest) — PC Games
+- [Y. Village](https://faysaldon121-beep.github.io/gameslibstatic/games/y-village-the-visitors) — PC Games
+- [NEED FOR SPEED: HOT PURSUIT REMASTERED](https://faysaldon121-beep.github.io/gameslibstatic/games/need-for-speed-hot-pursuit-remastered) — PC Games
+- [Need for Speed: Most Wanted – Limited Edition + All DLCs](https://faysaldon121-beep.github.io/gameslibstatic/games/need-for-speed-most-wanted-limited-edition-all-dlcs) — PC Games
+- [NEED FOR SPEED: PAYBACK – DELUXE EDITION](https://faysaldon121-beep.github.io/gameslibstatic/games/need-for-speed-payback-deluxe-edition) — PC Games
+- [Need for Speed: Shift](https://faysaldon121-beep.github.io/gameslibstatic/games/need-for-speed-shift) — PC Games
+- [Need for Speed: Undercover](https://faysaldon121-beep.github.io/gameslibstatic/games/need-for-speed-undercover) — PC Games
+- [Need for Speed: Shift](https://faysaldon121-beep.github.io/gameslibstatic/games/need-for-speed-shift) — PC Games
+- [Need for Speed: Shift](https://faysaldon121-beep.github.io/gameslibstatic/games/need-for-speed-shift) — PC Games
+- [Wolfenstein: Youngblood](https://faysaldon121-beep.github.io/gameslibstatic/games/wolfenstein-youngblood) — PC Games
+- [Wanted: Dead](https://faysaldon121-beep.github.io/gameslibstatic/games/wanted-dead) — PC Games
+- [World War Z: Aftermath](https://faysaldon121-beep.github.io/gameslibstatic/games/world-war-z-aftermath) — PC Games
+- [World War Zombie](https://faysaldon121-beep.github.io/gameslibstatic/games/world-war-zombie) — PC Games
+- [XCOM 2: Digital Deluxe Edition](https://faysaldon121-beep.github.io/gameslibstatic/games/xcom-2-digital-deluxe-edition) — PC Games
+- [Warhammer 40,000: Dawn of War 3](https://faysaldon121-beep.github.io/gameslibstatic/games/warhammer-40000-dawn-of-war-3) — PC Games
+- [Terminator: Resistance](https://faysaldon121-beep.github.io/gameslibstatic/games/terminator-resistance) — PC Games
+- [Verdun](https://faysaldon121-beep.github.io/gameslibstatic/games/verdun-tannenberg) — PC Games
+- [Spec Ops: The Line](https://faysaldon121-beep.github.io/gameslibstatic/games/spec-ops-line-2-dlc-multiplayer) — PC Games
+- [Sniper Elite](https://faysaldon121-beep.github.io/gameslibstatic/games/sniper-elite-v2-remastered) — PC Games
+- [Call of Duty: Black Ops III](https://faysaldon121-beep.github.io/gameslibstatic/games/call-of-duty-black-ops-iii) — Action
